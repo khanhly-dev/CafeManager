@@ -1,0 +1,128 @@
+﻿<Window x:Class="Cafe_Manager.ListEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cafe_Manager"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"   
+        Closing="Window_Closing"
+        Title="ListEmployee" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Bold><Italic>Danh sách nhân viên</Italic></Bold>
+        </TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Button Height="20" Width="20" Padding="0" Background="Blue" VerticalAlignment="Top" x:Name="AddEmployee_BTN" Margin="10,20,10,0" Click="AddEmployee_BTN_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Plus" />
+                    </Button.Content>
+                </Button>
+                <Button Height="20" Width="20" Padding="0" Background="Blue" VerticalAlignment="Top" x:Name="RemoveEmployee_BTN" Margin="10,20,10,0" Click="RemoveEmployee_BTN_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button.Content>
+                </Button>
+                <Button Height="20" Width="20" Padding="0" Background="Blue" VerticalAlignment="Top" x:Name="EditEmployee_BTN" Margin="10,20,10,0" Click="EditEmployee_BTN_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="Pencil" />
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+           
+            <ListView x:Name="ListEmployee_LV" Grid.Column="1"
+                      
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  ItemsSource="{Binding DataEmployees}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding emplayeeName}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Tên NV</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding birthday}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Ngày sinh</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding age}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Tuổi</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding adress}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>địa chỉ</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding position}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Chức vụ</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding salary}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Lương cơ bản</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding support}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Phụ cấp</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding note}">
+                            <GridViewColumn.Header>
+                                <TextBlock  FontSize="16">
+                                    <Bold><Italic>Ghi chú</Italic></Bold>
+                                </TextBlock>
+                            </GridViewColumn.Header>
+                            
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+
+    </Grid>
+</Window>

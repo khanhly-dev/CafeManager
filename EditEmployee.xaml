@@ -1,0 +1,164 @@
+﻿<Window x:Class="Cafe_Manager.EditEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cafe_Manager"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"  
+        Title="EditEmployee" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <ListView x:Name="EditEmployee_LV" Grid.Column="1"
+                      
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  ItemsSource="{Binding addEm}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Tên NV</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding emplayeeName}" Width="100"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+                    </GridViewColumn>
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Ngày sinh</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding birthday}" Width="100"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Tuổi</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding age}" Width="30"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>địa chỉ</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding adress, Mode=TwoWay}" Width="70"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Chức vụ</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding position, Mode=TwoWay}" Width="70"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Lương cơ bản</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding salary, Mode=TwoWay}" Width="50"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Phụ cấp</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding support, Mode=TwoWay}" Width="50"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Bold><Italic>Ghi chú</Italic></Bold>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding note, Mode=TwoWay}" Width="50"></TextBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <!--Panel chứa button-->
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Background="Blue" Width="100" Margin="0 0 20 0" x:Name="OKEdit_BTN" HorizontalAlignment="Right" Click="OKEdit_BTN_Click">
+                OK
+            </Button>
+            <Button Grid.Column="1" Background="Blue" Width="100" Margin="20 0 0 0" x:Name="CancelEdit_BTN" HorizontalAlignment="Left" Click="CancelEdit_BTN_Click">
+                Back
+            </Button>
+
+
+        </Grid>
+
+    </Grid>
+</Window>

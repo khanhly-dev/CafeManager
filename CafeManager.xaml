@@ -1,0 +1,443 @@
+﻿<Window x:Class="Cafe_Manager.CafeManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cafe_Manager"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"      
+        Closing="Window_Closed"
+        Title="CafeManager" Height="600" Width="1000">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="D:\C# Winform\Cafe Manager\bin\Debug\BackgroundShowManager.jpg" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Image Source="D:\project C#-WPF\Cafe Manager\bin\Debug\iconCafe.jpg" 
+                   Height="auto"
+                   Width="auto"
+                   Margin="10 5 5 5"
+                   Stretch="Fill"></Image>
+            <TextBlock Margin="20 17 0 17" Foreground="#efdcbc"
+                       FontSize="20">
+                <Bold><Italic>Nice Coffee</Italic></Bold>
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" >
+            <TextBlock x:Name="nameManager"
+                       Width="auto"
+                       Height="auto"
+                       Margin="200 0 10 0"                           
+                       HorizontalAlignment="Right"
+                       Foreground="#efdcbc"
+                       Text="{Binding SaveNameManager, Mode=TwoWay}"
+                       Padding="10 18 3 0"></TextBlock>
+            <Menu Margin="2" Background="{x:Null}" HorizontalAlignment="Right">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <materialDesign:PackIcon Kind="Settings" />
+                    </MenuItem.Header>
+                    <MenuItem                       
+                        Background="Wheat"
+      Header="chỉnh sửa">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon
+          Kind="Settings" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem
+                        Background="Wheat"
+      Header="đăng xuất">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon
+          Kind="Logout" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <materialDesign:Card 
+            Grid.Row="0" Grid.Column="0" Margin="10,10,10,0"
+    materialDesign:ShadowAssist.ShadowDepth="Depth3" 
+    Padding="0" >
+                <ListView x:Name="ListMenu_LV"
+                          
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  ItemsSource="{Binding Items1}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn 
+        DisplayMemberBinding="{Binding foodName}" Width="120" 
+         >
+                                <GridViewColumn.Header>
+                                    <TextBlock  FontSize="16">
+                                    <Bold><Italic>Đồ uống</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn Width="100"
+        DisplayMemberBinding="{Binding price}"
+        >
+                                <GridViewColumn.Header>
+                                    <TextBlock  FontSize="16">
+                                    <Bold><Italic>Giá</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </materialDesign:Card>
+
+            <Grid Grid.Row="1" Grid.Column="0" Background="{x:Null}" Margin="10 0 10 0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="AddMenu_BTN" 
+                Grid.Column="0"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+                Margin="0,9,3,9"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="80"
+                Padding="0"   
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" RenderTransformOrigin="0.125,0.531" Click="AddMenu_BTN_Click">
+                    Thêm
+                </Button>
+                <Button x:Name="EditMenu_BTN" 
+                Grid.Column="1"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="80"
+                Padding="0"      
+                Margin="5 0 5 0"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="EditMenu_BTN_Click">
+                    Sửa
+                </Button>
+                <Button Grid.Column="2" x:Name="RemoveMenu_BTN" Click="RemoveMenu_BTN_Click"               
+                Background="#65c3a8"
+                Foreground="#4a4144"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="80"
+                Padding="0"     
+                Margin="3,9,0,9"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="Xóa" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" x:Name="cc"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card
+            Grid.Row="0" 
+    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+            Margin="10 10 10 0"               
+    Padding="0" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Line Grid.Row="1" X1="10" Y1="7" X2="400" Y2="7" Stroke="Black" HorizontalAlignment="Center"></Line>
+                    <TextBlock HorizontalAlignment="Center" FontSize="50">
+                        <Italic>Sơ đồ bàn</Italic>
+                    </TextBlock>
+                    
+                    <Grid Grid.Row="1" Margin="0 15 0 0">
+                        <ScrollViewer>
+                            <WrapPanel x:Name="Table_PN">
+                                
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                 
+                </Grid>
+            </materialDesign:Card>
+
+            <Grid Grid.Row="1" Margin="10 0 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+                Margin="0 0 5 0"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="AddTable_BTN"
+                Padding="0"   
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                    Thêm bàn
+                </Button>
+                <Button Grid.Column="1"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="RemoveTable_BTN"
+                Padding="0"      
+                Margin="5 0 5 0"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" >
+                    Xóa bàn
+                </Button>
+                <Button Grid.Column="2"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="PoolTable_BTN"
+                Padding="0"     
+                Margin="5 0 5 0"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="gộp bàn" />
+                <Button Grid.Column="3"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="MoveTable_BTN"
+                Padding="0"      
+                Margin="5 0 0 0"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" RenderTransformOrigin="0.912,0.688">
+                    Chuyển bàn
+                </Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card
+            Grid.Row="0"
+            Margin="10 10 10 0"
+    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    Padding="0">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!--stackPanel of combobox-->
+
+                    <ComboBox x:Name="ListFood_CB" 
+                          SelectionChanged="ListFood_CB_SelectionChanged"
+  materialDesign:HintAssist.Hint="chọn món"
+                Width="180"      
+                Grid.Column="0"
+                Margin="5"
+                HorizontalAlignment="Left"
+                Foreground="Black"
+                           
+  IsEditable="True"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        
+                    </ComboBox>
+
+                    <!--stackPanel of numbericUpDownControl-->
+
+                    <Grid Height="40" Width="50"  Margin="5" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="20"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Background="White" Grid.Row="0" Grid.Column="1" Height="20" Width="20" x:Name="UpNumber_BTN" 
+                    Click="UpNumber_BTN_Click">
+                            <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-50 -48 -38 -46"
+        Kind="ChevronUp" Width="20" Height="20" Foreground="Black"/>
+                        </Button>
+
+                        <Button Background="White" Grid.Row="1" Grid.Column="1" Height="20" Width="20" x:Name="DownNumber_BTN" 
+                    Click="DownNumber_BTN_Click">
+                            <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-50 -46 -37 -47"
+        Kind="ChevronDown" Width="20" Height="20" Foreground="Black"/>
+                        </Button>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Padding="2"><Bold>SL</Bold></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="0"  Height="auto" Width="auto" x:Name="Number_TBX" Padding="0 0 0 -2" FontSize="15" Text="1"></TextBox>
+                    </Grid>
+                    <Button Height="auto" Width="auto" Padding="0" Margin="5" Grid.Column="2" IsDefault="True" Background="blue">
+                        <Button.Content>
+                            <materialDesign:PackIcon Kind="Plus" />
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card
+            Grid.Row="1"
+            Margin="10 8 10 0"
+    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    Padding="0" Height="auto">
+                <ListView x:Name="ListBill_LV" Grid.Row="1"
+                        
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  ItemsSource="{Binding Items1}" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn 
+        DisplayMemberBinding="{Binding foodName}" Width="auto" 
+         >
+                                <GridViewColumn.Header>
+                                    <TextBlock  FontSize="16">
+                                    <Bold><Italic>Đồ uống</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn Width="auto"
+        DisplayMemberBinding="{Binding price}"
+        >
+                                <GridViewColumn.Header>
+                                    <TextBlock  FontSize="16">
+                                    <Bold><Italic>Giá</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                            <GridViewColumn Width="50"
+        
+        >
+                                <GridViewColumn.Header>
+                                    <TextBlock FontSize="16">
+                                    <Bold><Italic>SL</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding amount}"></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="70"       
+        DisplayMemberBinding="{Binding sumPay}"
+        >
+                                <GridViewColumn.Header>
+                                    <TextBlock  FontSize="16">
+                                    <Bold><Italic>Tổng</Italic></Bold>
+                                    </TextBlock>
+                                </GridViewColumn.Header>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </materialDesign:Card>
+
+
+            <Grid Grid.Row="2" Grid.Column="2" Margin="10 0 10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+                Margin="0,9,10,9"
+                x:Name="AddBill_BTN"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+    
+                Padding="0"   
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" RenderTransformOrigin="0.088,0.531" Click="AddBill_BTN_Click">
+                    Thêm
+                </Button>
+                <Button Grid.Column="1"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+                Margin="5 0 5 0"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="RemoveBill_BTN"
+                Padding="0"   
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="RemoveBill_BTN_Click">
+                    Bỏ
+                </Button>
+                <Button Grid.Column="2"
+                Background="#65c3a8"
+                Foreground="#4a4144"
+                Margin="9,9,0,9"
+    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                x:Name="PayBill_BTN"
+                Padding="0"   
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    materialDesign:ShadowAssist.ShadowEdges="Bottom,Right"
+    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Click="PayBill_BTN_Click">
+                    Thanh toán
+                </Button>
+            </Grid>
+        </Grid>
+
+        <materialDesign:Card                  
+                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="8"
+    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+    Padding="0" Height="44">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Width="100" Padding="12" FontSize="20" Background="LightGreen" Foreground="#4a4144" >Quản lý</TextBlock>
+                <Button x:Name="ListEmployee_BTN" Height="60" Grid.Column="1" Background="{x:Null}" Content="Danh sách nhân viên" Foreground="Black" Margin="20 -5 0 0" Click="ListEmployee_BTN_Click"></Button>
+                <Button x:Name="Timesheets_BTN" Height="60" Grid.Column="2" Background="{x:Null}" Foreground="Black" Content="Bảng chấm công" Margin="0 -5 0 0" Click="Timesheets_BTN_Click"></Button>
+                <Button x:Name="revenue_BTN" Height="60" Grid.Column="3" Background="{x:Null}" Content="Doanh thu" Foreground="Black" Margin="0 -5 20 0" Click="revenue_BTN_Click"></Button>
+            </Grid>
+        </materialDesign:Card>
+        
+    </Grid>
+</Window>

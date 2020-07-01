@@ -1,0 +1,158 @@
+﻿<Window x:Class="Cafe_Manager.Pay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cafe_Manager"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"    
+        Closing="Window_Closing"
+        Title="Pay" Height="auto" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="115"></RowDefinition>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Grid.Row="0">
+            <Bold><Italic>---Nice Coffee---</Italic></Bold>
+        </TextBlock>
+
+        <StackPanel Grid.Row="1">
+            <Grid Margin="15 0 0 0">
+                <TextBlock Text="Tên TN: " Margin="0 10 0 0"></TextBlock>
+                <TextBox Width="270" HorizontalAlignment="Right" Margin="0 0 45 0" Padding="0 0 0 -1.5" ></TextBox>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <TextBlock Text="Ngày: " Margin="0 10 0 0"></TextBlock>
+                <TextBox Width="270"  HorizontalAlignment="Right" Margin="0 0 45 0" Padding="0 0 0 -1.5" x:Name="Date_TBX"></TextBox>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <TextBlock Text="Giờ: " Margin="0 10 0 0"></TextBlock>
+                <TextBox Width="270"  HorizontalAlignment="Right" Margin="0 0 45 0" Padding="0 0 0 -1.5" x:Name="Time_TBX"></TextBox>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <TextBlock Text="Số HD: " Margin="0 10 0 0"></TextBlock>
+                <TextBox Width="270"  HorizontalAlignment="Right" Margin="0 0 45 0" Padding="0 0 0 -1.5"></TextBox>
+            </Grid>
+        </StackPanel>
+
+        <ListView x:Name="PayBill_LV" Grid.Row="2"
+                        
+                      materialDesign:ShadowAssist.ShadowDepth="Depth3"
+  ItemsSource="{Binding Items1}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn 
+        DisplayMemberBinding="{Binding foodName}" Width="auto" 
+         >
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                <Italic>Đồ uống</Italic>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="auto"
+        DisplayMemberBinding="{Binding price}"
+        >
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                <Italic>Giá</Italic>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="50"
+        
+        >
+                        <GridViewColumn.Header>
+                            <TextBlock FontSize="16">
+                                    <Italic>SL</Italic>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding amount}"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="70"
+        DisplayMemberBinding="{Binding sumPay}"
+        >
+                        <GridViewColumn.Header>
+                            <TextBlock  FontSize="16">
+                                    <Italic>Tổng tiền</Italic>
+                            </TextBlock>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3">
+            <Grid Margin="15 0 0 0">
+                <TextBlock Text="Tổng tiền: " Margin="0 10 0 0"></TextBlock>
+                <TextBlock Width="270" HorizontalAlignment="Right" Margin="0 10 30 0" x:Name="SumPay_TB"></TextBlock>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <TextBlock Text="Giảm giá: " Margin="0 10 0 0"></TextBlock>
+                <TextBox Width="230"  HorizontalAlignment="Right" Margin="0 0 75 0" Padding="0 0 0 -1.5" x:Name="Discount_TBX" TextChanged="Discount_TBX_TextChanged"></TextBox>
+                <Button x:Name="DiscountDirect_BTN"
+                        Width="30" 
+                        Height="20" 
+                        HorizontalAlignment="Right"
+                        Background="Blue" 
+                        Content="VNĐ"
+                        Padding="0" 
+                        FontSize="10" ></Button>
+                <Button x:Name="DiscountParcent_BTN"
+                        Width="30" 
+                        Height="20"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 35 0"
+                        Background="Blue" 
+                        Padding="0" 
+                        Content="%" 
+                        FontSize="10" ></Button>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="133*"/>
+                    <ColumnDefinition Width="244*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Tiền khách trả: " Margin="0 10 0 0" Grid.ColumnSpan="2"></TextBlock>
+                <TextBox Width="240"  HorizontalAlignment="Right" Margin="0 0 30 0" Padding="0 0 0 -1.5" Grid.ColumnSpan="2" x:Name="Pay_TBX" TextChanged="Pay_TBX_TextChanged"></TextBox>
+            </Grid>
+            <Grid  Margin="15 0 0 0">
+                <TextBlock Text="Thừa: " Margin="0 10 0 0"></TextBlock>
+                <TextBlock Width="270"  HorizontalAlignment="Right" Margin="0 10 45 0" x:Name="MoneyReturn_TB"></TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Margin="15">
+            <TextBlock Margin="0 2 0 2">
+                <Bold><Italic>Mọi đóng góp của quý khách vui long liên hệ qua </Italic></Bold>
+            </TextBlock>
+            <TextBlock Margin="0 2 0 2">
+                <Bold><Italic>SĐT:</Italic></Bold>
+            </TextBlock>
+            <TextBlock Margin="0 2 0 2">
+                <Bold><Italic>Hotline:</Italic></Bold>
+            </TextBlock>
+        </StackPanel>
+
+        <Button Grid.Row="5" Background="blue" x:Name="Pay_BTN" Click="Pay_BTN_Click" >Thanh toán</Button>
+    </Grid>
+</Window>
+
+   
